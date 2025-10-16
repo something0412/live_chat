@@ -78,6 +78,8 @@
   height: 60%;
   flex: 1;
   margin-left: 1%;
+  padding: 1%;
+  font-size: x-large;
 }
 .chat-area > .chat-input-container > .send-btn{
   margin: 2%;

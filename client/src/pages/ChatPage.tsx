@@ -8,15 +8,6 @@ function ChatPage(props: any) {
     const endRef = useRef<HTMLDivElement | null>(null);
     const socket = props.socket;
 
-    useEffect(() => {
-        socket.on("get_chatName", (data: any) => {
-            const currentChat = data.find(
-                (chat: any) => chat["chat_id"] == props.currentRoom
-            );
-            setChatName(currentChat ? currentChat["chat_name"] : chatName);
-        });
-    }, [props.currentRoom]);
-
     // Receive signals from server
     useEffect(() => {
         socket.on("name_changed", (name: any) => {
@@ -26,7 +17,9 @@ function ChatPage(props: any) {
             setMessages(arr);
         });
         socket.on("from_server", (obj: any) => {
-            setMessages((prev) => [...prev, obj]);
+            if (obj["chat_id"] == props.currentRoom) {
+                setMessages((prev) => [...prev, obj]);
+            }
         });
 
         socket.on("left_room", (id: any) => {
@@ -35,14 +28,22 @@ function ChatPage(props: any) {
             }
         });
 
+        socket.on("get_chatName", (data: any) => {
+            const currentChat = data.find(
+                (chat: any) => chat["chat_id"] == props.currentRoom
+            );
+            setChatName(currentChat ? currentChat["chat_name"] : chatName);
+        });
+
         // cleanup
         return () => {
             socket.off("user_id");
             socket.off("from_server");
             socket.off("load_messages");
             socket.off("name_changed");
+            socket.off("get_chatName");
         };
-    }, []);
+    }, [props.currentRoom]);
 
     // focus on the latest message shown (auto scroll down)
     useEffect(() => {
