@@ -17,6 +17,7 @@ function ChatBubble(props: any) {
                         marginLeft: 7,
                         marginRight: 7,
                         fontWeight: "bold",
+                        fontSize: "25px",
                     }}
                 >
                     {props.currentUserID == props.user_id ? "You" : props.user}
@@ -43,12 +44,13 @@ function ChatBubble(props: any) {
                         style={{
                             margin: 2,
                             wordWrap: "break-word",
+                            fontSize: "25px",
                         }}
                     >
                         {props.text}
                     </p>
                 </div>
-                <span style={{ marginTop: "5px" }}>
+                <span style={{ marginTop: "5px", fontSize: "20px" }}>
                     <span style={{ fontStyle: "italic" }}>
                         {time.toLocaleDateString()}
                     </span>{" "}
@@ -65,6 +67,7 @@ function ChatBubble(props: any) {
                     flexDirection: "column",
                     fontStyle: "italic",
                     fontWeight: "bold",
+                    fontSize: "20px",
                     opacity: "60%",
                     margin: "0 2%",
                     alignItems: "center",

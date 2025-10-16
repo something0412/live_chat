@@ -42,12 +42,16 @@ function ChatsInfo(props: any) {
     return (
         <div className="chats-display">
             <div className="create-join-room">
-                <form onSubmit={handleJoin}>
+                <form
+                    onSubmit={handleJoin}
+                    style={{ display: "flex", flexDirection: "row" }}
+                >
                     <input
                         type="text"
                         value={text}
                         placeholder="Enter chat ID"
                         onChange={(e) => setText(e.target.value)}
+                        style={{ fontSize: "large" }}
                     />
                     <button type="submit">Join</button>
                 </form>

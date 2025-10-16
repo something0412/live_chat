@@ -26,8 +26,10 @@ function ChatRoom(props: any) {
     return (
         <div
             style={{
+                backgroundColor: "#8c92ac",
                 borderBottom: "2px solid black",
                 width: "100%",
+                height: "11%",
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -41,7 +43,7 @@ function ChatRoom(props: any) {
                 }}
                 onClick={handleClick}
             >
-                <h3 style={{ margin: 0 }}>
+                <h3 style={{ margin: 0, fontSize: "30px" }}>
                     {name ? name : `Chat ${props.index}`}
                 </h3>
             </div>
@@ -49,16 +51,17 @@ function ChatRoom(props: any) {
                 style={{
                     marginRight: "20px",
                     borderRadius: "50%",
-                    height: "40px",
-                    width: "40px",
+                    height: "37px",
+                    width: "37px",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     opacity: "60%",
+                    backgroundColor: "#8c92ac",
                 }}
                 onClick={handleEdit}
             >
-                <p style={{ fontSize: "20px", margin: 0 }}>ⓘ</p>
+                <p style={{ fontSize: "30px", margin: 0 }}>ⓘ</p>
             </button>
         </div>
     );
