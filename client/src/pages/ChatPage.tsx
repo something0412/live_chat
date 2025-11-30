@@ -78,6 +78,7 @@ function ChatPage(props: any) {
             user_id: props.user_id,
         });
         props.setRoom("");
+        setChatName("");
         const newList = props.list.filter(
             (chat: any) => chat["chat_id"] != props.currentRoom
         );
