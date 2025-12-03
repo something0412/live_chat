@@ -1,10 +1,11 @@
 import { useState } from "react";
+import type { LoginProps } from "../information/types";
 
-function Login(props: any) {
-    const [username, setUsername] = useState("");
+function Login(props: LoginProps) {
+    const [username, setUsername] = useState<string>("");
     // const [password, setPassword] = useState("");
 
-    const handleLogin = async (e: any) => {
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {

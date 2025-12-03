@@ -112,6 +112,7 @@ def on_join(data):
         )
 
         join_message = {
+            "chat_id": f"{chat_id}",
             "text": f"{username} joined the room.",
             "type": "alert",
             "timestamp": datetime.now(UTC).isoformat()
@@ -144,6 +145,7 @@ def on_leave(data):
     leave_room(room)
 
     leave_message = {
+        "chat_id": f"{chat_id}",
         "text": f"{username} left the room.",
         "type": "alert",
         "timestamp": datetime.now(UTC).isoformat()

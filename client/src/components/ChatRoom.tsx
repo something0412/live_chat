@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-function ChatRoom(props: any) {
-    const [name, setName] = useState(props.chat_name); // cannot get chat_name from db.
+import type { ChatRoomProps } from "../information/types";
+
+function ChatRoom(props: ChatRoomProps) {
+    const [name, setName] = useState(props.chat_name);
     // go to chat if clicked
     const handleClick = () => {
         props.socket.emit("join", {

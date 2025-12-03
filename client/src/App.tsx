@@ -4,12 +4,14 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 import "./App.css";
 
-export default function App() {
-    const [username, setUsername] = useState("");
-    const [userID, setUserID] = useState("");
-    const [chats, setChats] = useState([]);
+import type { ChatListItem, LoginData } from "./information/types";
 
-    const handleLogin = (data: any) => {
+export default function App() {
+    const [username, setUsername] = useState<string>("");
+    const [userID, setUserID] = useState<string>("");
+    const [chats, setChats] = useState<ChatListItem[]>([]);
+
+    const handleLogin = (data: LoginData) => {
         setUsername(data["username"]);
         setUserID(data["user_id"]);
         setChats(data["chats"]);
@@ -24,7 +26,7 @@ export default function App() {
                         username ? (
                             <Main
                                 username={username}
-                                id={userID}
+                                user_id={userID}
                                 chats={chats}
                             />
                         ) : (

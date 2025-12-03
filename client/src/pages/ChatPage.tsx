@@ -1,36 +1,41 @@
 import { useEffect, useState, useRef } from "react";
 import ChatBubble from "../components/ChatBubble";
+import type {
+    ChatsProps,
+    ChatMessage,
+    ChatListItem,
+} from "../information/types";
 
-function ChatPage(props: any) {
-    const [messages, setMessages] = useState<string[]>([]);
-    const [input, setInput] = useState("");
-    const [chatName, setChatName] = useState("");
+function ChatPage(props: ChatsProps) {
+    const [messages, setMessages] = useState<ChatMessage[]>([]);
+    const [input, setInput] = useState<string>("");
+    const [chatName, setChatName] = useState<string>("");
     const endRef = useRef<HTMLDivElement | null>(null);
     const socket = props.socket;
 
     // Receive signals from server
     useEffect(() => {
-        socket.on("name_changed", (name: any) => {
+        socket.on("name_changed", (name: string) => {
             setChatName(name);
         });
-        socket.on("load_messages", (arr: any) => {
+        socket.on("load_messages", (arr: ChatMessage[]) => {
             setMessages(arr);
         });
-        socket.on("from_server", (obj: any) => {
+        socket.on("from_server", (obj: ChatMessage) => {
             if (obj["chat_id"] == props.currentRoom) {
                 setMessages((prev) => [...prev, obj]);
             }
         });
 
-        socket.on("left_room", (id: any) => {
+        socket.on("left_room", (id: string) => {
             if (id == props.user_id) {
                 setMessages([]);
             }
         });
 
-        socket.on("get_chatName", (data: any) => {
+        socket.on("get_chatName", (data: ChatListItem[]) => {
             const currentChat = data.find(
-                (chat: any) => chat["chat_id"] == props.currentRoom
+                (chat) => chat["chat_id"] == props.currentRoom
             );
             setChatName(currentChat ? currentChat["chat_name"] : chatName);
         });
@@ -64,7 +69,7 @@ function ChatPage(props: any) {
         setInput("");
     };
 
-    const handleKeyDown = (e: any) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             sendMessage();
         }
@@ -80,7 +85,7 @@ function ChatPage(props: any) {
         props.setRoom("");
         setChatName("");
         const newList = props.list.filter(
-            (chat: any) => chat["chat_id"] != props.currentRoom
+            (chat) => chat["chat_id"] != props.currentRoom
         );
         props.setList(newList);
     };
@@ -104,7 +109,7 @@ function ChatPage(props: any) {
                     </button>
                 </div>
                 <div className="message-display">
-                    {messages.map((msg: any, i) => (
+                    {messages.map((msg, i) => (
                         <ChatBubble
                             key={i}
                             currentUserID={props.user_id}

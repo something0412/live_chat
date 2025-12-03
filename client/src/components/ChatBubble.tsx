@@ -1,4 +1,6 @@
-function ChatBubble(props: any) {
+import type { ChatBubbleProps } from "../information/types";
+
+function ChatBubble(props: ChatBubbleProps) {
     const MessageBubble = () => {
         const time = new Date(props.time);
         return (
