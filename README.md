@@ -27,7 +27,7 @@ A real-time chat application built with React, Flask, Socket.IO, and MongoDB, al
 1. Clone the repository:
 
 ```bash
-  git clone [https://link-to-project](https://github.com/something0412/live_chat)
+  git clone https://github.com/something0412/live_chat
   cd live_chat
 ```
 
